@@ -125,3 +125,9 @@ module "ec2_instances" {
     environment = "development"
   }
 }
+
+module "s3-bucket-swarna" {
+  source  = "app.terraform.io/policy-as-code-training/s3-bucket-swarna/aws"
+  version = "1.1.0"
+  bucket_name = "my-newbucket-swarna-42326"
+}
