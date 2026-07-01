@@ -14,7 +14,7 @@
 }*/
 
 terraform {
-/*
+   /*
   cloud {
     organization = "policy-as-code-training"
     workspaces {
@@ -22,15 +22,16 @@ terraform {
       project = "policy-as-dev"
     }
   }
-*/
+ */
   required_providers {
+    
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.28.0"
+ //     version = "~> 3.28.0"
     }
   }
-  required_version = ">= 0.14.0"
-}
+//  required_version = ">= 0.14.0"
+ }
 
 provider "aws" {
   region  = "us-west-1"
@@ -142,6 +143,6 @@ module "ec2_instances" {
 
   tags = {
     project     = "project-alpha",
-    environment = "dev"
+    environment = "development"
   }
 }
