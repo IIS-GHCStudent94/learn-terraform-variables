@@ -75,7 +75,7 @@ module "app_security_group" {
     environment = "dev"
   }
 }
-
+/*
 module "lb_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
@@ -91,6 +91,7 @@ module "lb_security_group" {
     environment = "dev"
   }
 }
+*/
 
 resource "random_string" "lb_id" {
   length  = 3
@@ -171,6 +172,7 @@ module "lb_security_group" {
     environment = "development"
   }
 }
+
 
 resource "aws_ebs_volume" "unencrypted" {
   availability_zone = "us-west-1a"
