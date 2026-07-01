@@ -147,7 +147,7 @@ module "ec2_instances" {
     environment = "development"
   }
 }
-
+/*
 module "lb_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/web"
   version = "3.17.0"
@@ -178,4 +178,36 @@ resource "aws_ebs_volume" "unencrypted" {
   availability_zone = "us-west-1b"
   size              = 8
   encrypted         = false # Intentional violation: unencrypted EBS volume
+}
+*/
+
+module "lb_security_group" {
+  source  = "terraform-aws-modules/security-group/aws//modules/web"
+  version = "3.17.0"
+
+  name        = "lb-sg-project-alpha-dev"
+  description = "Security group for load balancer with HTTP ports open within VPC"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress_cidr_blocks = ["10.0.0.0/16"]
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      description = "SSH restricted to internal network"
+      cidr_blocks = "10.0.0.0/16"
+    }
+  ]
+
+  tags = {
+    project     = "project-alpha",
+    environment = "development"
+  }
+}
+
+resource "aws_ebs_volume" "unencrypted" {
+  availability_zone = "us-west-1b"
+  size              = 8
+  encrypted         = true # Remediated: enable encryption
 }
