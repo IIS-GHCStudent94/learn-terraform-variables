@@ -56,7 +56,7 @@ module "app_security_group" {
 
   tags = {
     project     = "project-alpha",
-    environment = "dev"
+    environment = "development"
   }
 }
 
